@@ -1,16 +1,24 @@
-# Quadratic Blackbox
+# Quadratic DLL Testing Project
 
-Simple Java console app for testing the native `quadratic.dll` solver through JNA.
+This project tests the unstable native library `quadratic.dll`, 
+which solves quadratic equations in the form `a*x^2 + b*x + c = 0`.
 
-## Run the console app
+## DLL Interface
 
-Run the `main` method in `src/main/java/quadratic/Main.java`.
+- `setA(double a)` - sets coefficient `a`
+- `setB(double b)` - sets coefficient `b`
+- `setC(double c)` - sets coefficient `c`
+- `getSolution(double* px1, double* px2)` - computes roots and returns a status code
 
-It opens a console prompt where you can enter `A`, `B`, and `C` and directly test the `.dll` behavior.
+Return codes:
+- `SOLUTION_OK = 0`
+- `ERROR_A_IS_ZERO = 1`
+- `ERROR_NO_REAL_ROOTS = 2`
 
-## Unit tests
+Example: `a=1, b=0, c=-4` should return `SOLUTION_OK` with roots `-2` and `2`.
 
-Unit tests are in `src/test/java/quadratic/QuadraticUnitTest.java`.
+## Testing Scope
 
-They cover multiple black-box scenarios for return codes and roots.
-
+The DLL is known to be unstable and may return incorrect results, so both manual and automated checks are included:
+- Console testing via `src/main/java/quadratic/Main.java`
+- Unit tests in `src/test/java/quadratic/QuadraticUnitTest.java`
