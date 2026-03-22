@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String dllPath = "resources/quadratic.dll";
+        String dllPath = "C:\\Coding\\Kool\\quadratic-blackbox\\src\\main\\resources\\quadratic.dll";
 
         QuadraticService service = new QuadraticService(dllPath);
         Scanner sc = new Scanner(System.in);
