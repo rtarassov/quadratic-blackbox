@@ -24,6 +24,8 @@ class QuadraticUnitTest {
         SolutionResult result = service.solve(1, 0, -4);
 
         assertAll(
+                // Works most of the time, fails randomly with wrong decimal point in roots (-2.000002 instead of -2.000000)
+                // Sometimes returns code 1 instead of code 0.
                 () -> assertEquals(SolutionResult.SOLUTION_OK, result.code()),
                 () -> assertRootsUnordered(result, -2, 2)
         );
@@ -176,7 +178,7 @@ class QuadraticUnitTest {
                 () -> assertRootsUnordered(firstResult, 1, 1),
                 // FAIL, state leaks from first call. Returns code 2 instead of code 0. Works correctly manually
                 () -> assertEquals(SolutionResult.SOLUTION_OK, secondResult.code()),
-                // FAIL, state leaks from first call. Return -2 and -2 instead of -2 and 2. Works correctly manually
+                // FAIL, state leaks from first call. Returns -2 and -2 instead of -2 and 2. Works correctly manually
                 () -> assertRootsUnordered(secondResult, -2, 2)
         );
     }
