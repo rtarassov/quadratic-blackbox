@@ -3,6 +3,7 @@ package quadratic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -21,16 +22,20 @@ class QuadraticUnitTest {
     void case1_shouldReturnTwoRealRoots() {
         SolutionResult result = service.solve(1, 0, -4);
 
-        assertRootsUnordered(result, -2, 2);
-        assertEquals(SolutionResult.SOLUTION_OK, result.code());
+        assertAll(
+                () -> assertEquals(SolutionResult.SOLUTION_OK, result.code()),
+                () -> assertRootsUnordered(result, -2, 2)
+        );
     }
 
     @Test
     void case2_shouldReturnDoubleRootOne() {
         SolutionResult result = service.solve(1, -2, 1);
 
-        assertRootsUnordered(result, 1, 1);
-        assertEquals(SolutionResult.SOLUTION_OK, result.code());
+        assertAll(
+                () -> assertEquals(SolutionResult.SOLUTION_OK, result.code()),
+                () -> assertRootsUnordered(result, 1, 1)
+        );
     }
 
     @Test
@@ -51,34 +56,40 @@ class QuadraticUnitTest {
     void case5_shouldReturnNegativeRoots() {
         SolutionResult result = service.solve(1, 5, 6);
 
-        // Correct roots
-        assertRootsUnordered(result, -3, -2);
-        // Incorrect result.code
-        assertEquals(SolutionResult.SOLUTION_OK, result.code());
+        assertAll(
+                () -> assertRootsUnordered(result, -33, -2),
+                () -> assertEquals(SolutionResult.SOLUTION_OK, result.code())
+        );
     }
 
     @Test
     void case6_shouldReturnPositiveRoots() {
         SolutionResult result = service.solve(1, -5, 6);
 
-        assertRootsUnordered(result, 2, 3);
-        assertEquals(SolutionResult.SOLUTION_OK, result.code());
+        assertAll(
+                () -> assertEquals(SolutionResult.SOLUTION_OK, result.code()),
+                () -> assertRootsUnordered(result, 2, 3)
+        );
     }
 
     @Test
     void case7_shouldReturnZeroAndNegativeTwo() {
         SolutionResult result = service.solve(1, 2, 0);
 
-        assertRootsUnordered(result, 0, -2);
-        assertEquals(SolutionResult.SOLUTION_OK, result.code());
+        assertAll(
+                () -> assertEquals(SolutionResult.SOLUTION_OK, result.code()),
+                () -> assertRootsUnordered(result, 0, -2)
+        );
     }
 
     @Test
     void case8_shouldReturnDoubleRootZero() {
         SolutionResult result = service.solve(1, 0, 0);
 
-        assertRootsUnordered(result, 0, 0);
-        assertEquals(SolutionResult.SOLUTION_OK, result.code());
+        assertAll(
+                () -> assertEquals(SolutionResult.SOLUTION_OK, result.code()),
+                () -> assertRootsUnordered(result, 0, 0)
+        );
     }
 
     private void assertRootsUnordered(SolutionResult result, double expectedRoot1, double expectedRoot2) {
