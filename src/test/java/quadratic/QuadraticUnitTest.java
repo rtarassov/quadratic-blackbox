@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class QuadraticUnitTest {
-    // Replace with the actual path to your DLL
-    private static final String DLL_PATH = "C:\\Coding\\Kool\\quadratic-blackbox\\src\\main\\resources\\quadratic.dll";
+    private static final String DLL_PATH = "src/main/resources/quadratic.dll";
     private static final double EPSILON = 1e-9;
 
     private QuadraticService service;
